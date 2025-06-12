@@ -8,11 +8,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.logging.Level;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
@@ -41,10 +37,10 @@ public class TestCase {
     @DisplayName("spi")
     void test00() throws Exception {
         String[] rs = ImageIO.getReaderFormatNames();
-System.err.println("-- reader --");
-for (String r : rs) {
- System.err.println(r);
-}
+        System.err.println("-- reader --");
+        for (String r : rs) {
+            System.err.println(r);
+        }
         assertTrue(Arrays.asList(rs).contains("WEBP"));
     }
 
@@ -52,7 +48,7 @@ for (String r : rs) {
     @DisplayName("spi specified")
     void test01() throws Exception {
         ImageReader ir = ImageIO.getImageReadersByFormatName("webp").next();
-        ImageInputStream iis = ImageIO.createImageInputStream(Files.newInputStream(Paths.get(file)));
+        ImageInputStream iis = ImageIO.createImageInputStream(new File(file));
         ir.setInput(iis);
         BufferedImage image = ir.read(0);
         assertNotNull(image);
@@ -61,7 +57,7 @@ for (String r : rs) {
     @Test
     @DisplayName("spi auto")
     void test02() throws Exception {
-        BufferedImage image = ImageIO.read(Files.newInputStream(Paths.get(file)));
+        BufferedImage image = ImageIO.read(new File(file));
         assertNotNull(image);
     }
 
