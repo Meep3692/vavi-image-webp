@@ -290,12 +290,13 @@ public class MacroBlock {
     }
 
     public SubBlock getSubBlock(SubBlock.PLANE plane, int i, int j) {
-        return switch (plane) {
-            case Y1 -> getYSubBlock(i, j);
-            case U -> getUSubBlock(i, j);
-            case V -> getVSubBlock(i, j);
-            case Y2 -> getY2SubBlock();
-        };
+        switch (plane) {
+            case Y1: return getYSubBlock(i, j);
+            case U: return getUSubBlock(i, j);
+            case V: return getVSubBlock(i, j);
+            case Y2: return getY2SubBlock();
+            default: throw new RuntimeException("Unreachable");
+        }
     }
 
     public int getSubblockX(SubBlock sb) {

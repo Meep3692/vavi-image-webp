@@ -35,14 +35,14 @@ public class Globals {
                                          * predicted */
 
     public static String getModeAsString(int mode) {
-        return switch (mode) {
-            case DC_PRED -> "DC_PRED";
-            case V_PRED -> "V_PRED";
-            case H_PRED -> "H_PRED";
-            case TM_PRED -> "TM_PRED";
-            case B_PRED -> "B_PRED";
-            default -> "not found";
-        };
+        switch (mode) {
+            case DC_PRED: return "DC_PRED";
+            case V_PRED: return "V_PRED";
+            case H_PRED: return "H_PRED";
+            case TM_PRED: return "TM_PRED";
+            case B_PRED: return "B_PRED";
+            default: return "not found";
+        }
     }
 
     /* intra_bmode */
@@ -72,19 +72,19 @@ public class Globals {
     public static final int B_HU_PRED = 9; /* ENE (horizontal up) "" */
 
     public static String getSubBlockModeAsString(int mode) {
-        return switch (mode) {
-            case B_DC_PRED -> "B_DC_PRED";
-            case B_TM_PRED -> "B_TM_PRED";
-            case B_VE_PRED -> "B_VE_PRED";
-            case B_HE_PRED -> "B_HE_PRED";
-            case B_LD_PRED -> "B_LD_PRED";
-            case B_RD_PRED -> "B_RD_PRED";
-            case B_VR_PRED -> "B_VR_PRED";
-            case B_VL_PRED -> "B_VL_PRED";
-            case B_HD_PRED -> "B_HD_PRED";
-            case B_HU_PRED -> "B_HU_PRED";
-            default -> "not found";
-        };
+        switch (mode) {
+            case B_DC_PRED: return "B_DC_PRED";
+            case B_TM_PRED: return "B_TM_PRED";
+            case B_VE_PRED: return "B_VE_PRED";
+            case B_HE_PRED: return "B_HE_PRED";
+            case B_LD_PRED: return "B_LD_PRED";
+            case B_RD_PRED: return "B_RD_PRED";
+            case B_VR_PRED: return "B_VR_PRED";
+            case B_VL_PRED: return "B_VL_PRED";
+            case B_HD_PRED: return "B_HD_PRED";
+            case B_HU_PRED: return "B_HU_PRED";
+            default: return "not found";
+        }
     }
 
     public static final int MAX_MB_SEGMENTS = 4;

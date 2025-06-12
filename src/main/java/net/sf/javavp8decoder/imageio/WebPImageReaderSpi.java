@@ -95,8 +95,11 @@ public class WebPImageReaderSpi extends ImageReaderSpi {
 
     @Override
     public boolean canDecodeInput(Object input) {
-        if (!(input instanceof ImageInputStream stream)) {
+        ImageInputStream stream;
+        if (!(input instanceof ImageInputStream)) {
             return false;
+        }else{
+            stream = (ImageInputStream)input;
         }
 
         byte[] b = new byte[8];

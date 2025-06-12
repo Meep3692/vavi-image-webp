@@ -24,7 +24,6 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serial;
 
 import javax.imageio.ImageIO;
 import javax.imageio.spi.IIORegistry;
@@ -39,7 +38,6 @@ public class plugintest extends JFrame {
     /**
      *
      */
-    @Serial
     private static final long serialVersionUID = 1L;
 
     public static void main(String[] args) {
@@ -88,7 +86,6 @@ public class plugintest extends JFrame {
             /**
              *
              */
-            @Serial
             private static final long serialVersionUID = 1L;
 
             private final BufferedImage bi;

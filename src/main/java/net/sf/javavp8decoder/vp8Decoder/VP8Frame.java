@@ -1053,13 +1053,14 @@ public class VP8Frame {
                         mb.setFilterLevel(level);
                     }
                 } else {
-                    int BMode = switch (y_mode) {
-                        case Globals.DC_PRED -> Globals.B_DC_PRED;
-                        case Globals.V_PRED -> Globals.B_VE_PRED;
-                        case Globals.H_PRED -> Globals.B_HE_PRED;
-                        case Globals.TM_PRED -> Globals.B_TM_PRED;
-                        default -> Globals.B_DC_PRED;
-                    };
+                    int BMode;
+                    switch (y_mode) {
+                        case Globals.DC_PRED: BMode = Globals.B_DC_PRED;
+                        case Globals.V_PRED: BMode = Globals.B_VE_PRED;
+                        case Globals.H_PRED: BMode = Globals.B_HE_PRED;
+                        case Globals.TM_PRED: BMode = Globals.B_TM_PRED;
+                        default: BMode = Globals.B_DC_PRED;
+                    }
 
                     for (int x = 0; x < 4; x++) {
                         for (int y = 0; y < 4; y++) {
