@@ -1055,11 +1055,11 @@ public class VP8Frame {
                 } else {
                     int BMode;
                     switch (y_mode) {
-                        case Globals.DC_PRED: BMode = Globals.B_DC_PRED;
-                        case Globals.V_PRED: BMode = Globals.B_VE_PRED;
-                        case Globals.H_PRED: BMode = Globals.B_HE_PRED;
-                        case Globals.TM_PRED: BMode = Globals.B_TM_PRED;
-                        default: BMode = Globals.B_DC_PRED;
+                        case Globals.DC_PRED: BMode = Globals.B_DC_PRED; break;
+                        case Globals.V_PRED: BMode = Globals.B_VE_PRED; break;
+                        case Globals.H_PRED: BMode = Globals.B_HE_PRED; break;
+                        case Globals.TM_PRED: BMode = Globals.B_TM_PRED; break;
+                        default: BMode = Globals.B_DC_PRED; break;
                     }
 
                     for (int x = 0; x < 4; x++) {
