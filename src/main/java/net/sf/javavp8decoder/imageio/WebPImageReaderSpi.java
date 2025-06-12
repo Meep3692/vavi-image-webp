@@ -31,13 +31,19 @@ public class WebPImageReaderSpi extends ImageReaderSpi {
 
     static {
         try {
-            try (InputStream is = WebPImageReaderSpi.class.getResourceAsStream("/META-INF/maven/vavi/vavi-image-webp/pom.properties")) {
+            InputStream is = null;
+            try {
+                is = WebPImageReaderSpi.class.getResourceAsStream("/META-INF/maven/vavi/vavi-image-webp/pom.properties");
                 if (is != null) {
                     Properties props = new Properties();
                     props.load(is);
                     version = props.getProperty("version", "undefined in pom.properties");
                 } else {
                     version = System.getProperty("vavi.test.version", "undefined");
+                }
+            } finally {
+                if(is != null){
+                    is.close();
                 }
             }
         } catch (Exception e) {

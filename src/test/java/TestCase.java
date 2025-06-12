@@ -6,6 +6,7 @@
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,7 +21,6 @@ import javax.swing.JPanel;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import vavi.util.Debug;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -65,19 +65,30 @@ for (String r : rs) {
         assertNotNull(image);
     }
 
+    private void test1Walk(File file){
+        if(file.isFile()){
+            if(file.getName().endsWith(".webp")){
+                System.out.println(file);
+                try {
+                    ImageIO.read(file);
+                    System.out.println(file + ": OK");
+                } catch (IOException e) {
+                    System.out.println(file + ": " + e);
+                    fail();
+                }
+            }
+        }else{
+            for(File f : file.listFiles()){
+                test1Walk(f);
+            }
+        }
+    }
+
     @Test
     void test1() throws Exception {
-        Path dir = Paths.get("src/test/resources/testdata");
-        Files.walk(dir).filter(p -> p.getFileName().toString().matches(".+\\.webp")).forEach(f -> {
-Debug.println(Level.FINER, f);
-            try {
-                ImageIO.read(f.toFile());
-Debug.println(Level.INFO, f + ": OK");
-            } catch (IOException e) {
-Debug.println(Level.WARNING, f + ": " + e);
-                fail();
-            }
-        });
+        File dir = new File("src/test/resources/testdata");
+        
+        test1Walk(dir);
     }
 
     /** */
@@ -87,6 +98,22 @@ Debug.println(Level.WARNING, f + ": " + e);
     }
 
     BufferedImage image;
+
+    private void execWalk(File f, JFrame frame, JPanel panel){
+        if(f.isFile()){
+            try {
+                image = ImageIO.read(f);
+            } catch (Exception e) {
+                System.out.println(f + ": " + e);
+            }
+            frame.setTitle(f.toString());
+            panel.repaint();
+        }else{
+            for(File file : f.listFiles()){
+                execWalk(file, frame, panel);
+            }
+        }
+    }
 
     /** */
     void exec() throws IOException {
@@ -102,16 +129,8 @@ Debug.println(Level.WARNING, f + ": " + e);
         frame.getContentPane().add(panel);
         frame.setVisible(true);
 
-        Path dir = Paths.get("src/test/resources/testdata");
-        Files.walk(dir).filter(p -> p.getFileName().toString().matches(".+\\.webp")).forEach(f -> {
-            try {
-                image = ImageIO.read(f.toUri().toURL());
-            } catch (Exception e) {
-                Debug.println(f + ": " + e);
-            }
-            frame.setTitle(f.toString());
-            panel.repaint();
-        });
+        File dir = new File("src/test/resources/testdata");
+        execWalk(dir, frame, panel);
     }
 }
 

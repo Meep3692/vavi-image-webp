@@ -80,8 +80,13 @@ public class WebPViewer extends JFrame implements MouseMotionListener, MouseList
         try {
             // Set System L&F
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException |
-                 IllegalAccessException e) {
+        } catch (UnsupportedLookAndFeelException e) {
+            // handle exception
+        } catch (ClassNotFoundException e) {
+            // handle exception
+        } catch (InstantiationException e) {
+            // handle exception
+        } catch (IllegalAccessException e) {
             // handle exception
         }
 
@@ -185,7 +190,7 @@ public class WebPViewer extends JFrame implements MouseMotionListener, MouseList
         }
     }
 
-    private void loadImageData(File f) {
+    private void loadImageData(final File f) {
 
         new Thread() {
             @Override

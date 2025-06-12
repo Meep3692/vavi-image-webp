@@ -104,7 +104,7 @@ public class WebPImageReader extends ImageReader implements IIOReadProgressListe
 
         ImageTypeSpecifier imageType = null;
         int datatype = DataBuffer.TYPE_BYTE;
-        java.util.List<ImageTypeSpecifier> l = new ArrayList<>();
+        java.util.List<ImageTypeSpecifier> l = new ArrayList<ImageTypeSpecifier>();
 
         ColorSpace rgb = ColorSpace.getInstance(ColorSpace.CS_sRGB);
         int[] bandOffsets = new int[3];

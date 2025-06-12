@@ -27,7 +27,9 @@ public class IVF {
     private static final int IVF_FILE_HDR_SZ = 32;
 
     IVF() throws IOException {
-        try (InputStream in = getClass().getResourceAsStream("bbb.ivf")) {
+        InputStream in = null;
+        try {
+            in = getClass().getResourceAsStream("bbb.ivf");
             System.out.println("IVF");
             readFileHeader(in);
 
@@ -43,6 +45,8 @@ public class IVF {
                 //f.decodeFrame(frameData, false);
                 x++;
             }
+        } finally {
+            if(in != null) in.close();
         }
     }
 

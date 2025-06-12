@@ -57,13 +57,18 @@ public class VP8Decoder {
     }
 
     public void writeFile(int[][] data) throws IOException {
-        try (FileOutputStream out = new FileOutputStream("outagain.raw")) {
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream("outagain.raw");
             for (int y = 0; y < data[0].length; y++)
                 for (int[] datum : data) {
                     out.write(datum[y]);
                     out.write(datum[y]);
                     out.write(datum[y]);
                 }
+        } finally {
+            if(out != null)
+                out.close();
         }
     }
 
@@ -73,7 +78,9 @@ public class VP8Decoder {
         int[][] vData = frame.getVBuffer();
         int outStride = (f.getWidth() + 1) & ~1;
         int uvHeight = (f.getHeight() + 1) / 2;
-        try (FileOutputStream out = new FileOutputStream(fileName)) {
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(fileName);
             out.write((byte) 'P');
             out.write((byte) '5');
             out.write((byte) 0x0a);
@@ -100,6 +107,8 @@ public class VP8Decoder {
                     out.write(vData[x][y]);
                 }
             }
+        } finally {
+            if(out != null) out.close();
         }
     }
 
@@ -107,7 +116,9 @@ public class VP8Decoder {
         int[][] yData = frame.getYBuffer();
         int[][] uData = frame.getUBuffer();
         int[][] vData = frame.getVBuffer();
-        try (FileOutputStream out = new FileOutputStream(fileName)) {
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(fileName);
             out.write((byte) 'P');
             out.write((byte) '5');
             out.write((byte) 0x0a);
@@ -132,6 +143,8 @@ public class VP8Decoder {
                 for (int x = 0; x < (f.getWidth() + 1) / 2; x++) {
                     out.write(vData[x][y]);
                 }
+        } finally {
+            if(out != null) out.close();
         }
     }
 }

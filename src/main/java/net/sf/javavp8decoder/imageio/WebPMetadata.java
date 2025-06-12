@@ -43,9 +43,9 @@ public class WebPMetadata extends IIOMetadata {
     static final boolean standardMetadataFormatSupported = false;
 
     // Keyword/value pairs
-    List<String> keywords = new ArrayList<>();
+    List<String> keywords = new ArrayList<String>();
 
-    List<String> values = new ArrayList<>();
+    List<String> values = new ArrayList<String>();
 
     public WebPMetadata() {
         super(standardMetadataFormatSupported,
@@ -127,7 +127,7 @@ public class WebPMetadata extends IIOMetadata {
 
     @Override
     public void reset() {
-        this.keywords = new ArrayList<>();
-        this.values = new ArrayList<>();
+        this.keywords = new ArrayList<String>();
+        this.values = new ArrayList<String>();
     }
 }
